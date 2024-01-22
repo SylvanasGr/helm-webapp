@@ -1,38 +1,32 @@
 # Kubernetes and Helm Quick Instructions
 
-## Set Up Aliases:
+**Navigation and Commands**
+
+Shortcuts for `kubectl` and `helm`:
 
 ```bash
 alias k=kubectl
+alias h=helm
 ```
 
-## Port Forwarding and Minikube Tunnel:
-k port-forward 8080:80
-minikube tunnel
+**Port Forwarding and Access**
 
-## View Kubernetes Resources:
-k get all
+- Forward local port 8080 to container port 80: `k port-forward 8080:80`
+- Enable external access to LoadBalancer services with Minikube Tunnel: `minikube tunnel`
 
+**View Kubernetes Resources**
 
-# Helm Commands:
+- List all resources in the default namespace: `k get all`
 
-## Install Helm Chart:
-helm install webapp-release webapp1/
+**Helm Chart Management**
 
-## List Helm Releases:
-helm ls
+- Install a Helm chart: `h install <chart-name> <directory>`
+- List all Helm releases: `h ls`
+- Upgrade a Helm release: `h upgrade <release-name> <directory> --values <values-file>`
 
-## Upgrade Helm Release:
-helm upgrade webapp-release webapp1/ --values webapp1/values.yaml
+**Namespaces for Isolation**
 
-## Create Kubernetes Namespaces:
-kubectl create namespace dev
-kubectl create namespace prod
-
-# Helm Installations in Different Environments:
-
-## Dev Environment:
-helm install mywebapp-release-dev ./webapp1 --values ./webapp1/values.yaml -f ./webapp1/values-dev.yaml -n dev
-
-## Prod Enviroment:
-helm install mywebapp-release-prod ./webapp1 --values ./webapp1/values.yaml -f ./webapp1/values-prod.yaml -n prod
+- Create a namespace: `k create namespace <namespace-name>`
+- Develop in `dev` and deploy in `prod` using values files:
+  - Dev: `h install mywebapp-release-dev ./webapp1 --values ./webapp1/values.yaml -f ./webapp1/values-dev.yaml -n dev`
+  - Prod: `h install mywebapp-release-prod ./webapp1 --values ./webapp1/values.yaml -f ./webapp1/values-prod.yaml -n prod`
